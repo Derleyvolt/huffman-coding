@@ -36,7 +36,7 @@ Node* retrieve_tree(int& idx, int& idx2, unsigned char* decomp, int tam, short* 
 	return node;
 }
 
-unsigned char* retrieve_string(Node* tree, unsigned char *bitstring, int tam, int file_len, int idx) {
+unsigned char* retrieve_file(Node* tree, unsigned char *bitstring, int tam, int file_len, int idx) {
     unsigned char* original_file = new unsigned char[file_len];
 
     Node* root = tree;
@@ -146,7 +146,7 @@ double decompress_file(char* input, char* output) {
 
     Node* tree = retrieve_tree(idx, idx2, data->tree, data->tree_len, data->leaf_index);
 
-    original_file = retrieve_string(tree, data->parsed_bitstring, data->bitstring_len, data->file_len, 0);
+    original_file = retrieve_file(tree, data->parsed_bitstring, data->bitstring_len, data->file_len, 0);
 
     generate_original_file(output, original_file, data->file_len);
 
