@@ -40,7 +40,7 @@ unsigned char* retrieve_string(Node* tree, unsigned char *bitstring, int tam, in
 
     int index = 0;
 
-    bool border_case = tree->left > 0 ? 0 : 1;
+   bool border_case = tree->left != NULL ? 0 : 1;
 
     while(idx <= tam) {
         if(root->leaf) {
