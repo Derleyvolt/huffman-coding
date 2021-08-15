@@ -154,7 +154,6 @@ double decompress_file(char* input, char* output) {
     delete[] data->parsed_bitstring;
     delete[] data->tree;
     delete[] data->leaf_index;
-    delete[] data->leaf_index;
     delete[] data->bitstring;
 
     fclose(fp);
