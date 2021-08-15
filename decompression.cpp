@@ -1,7 +1,4 @@
-#include <iostream>
 #include "compression.cpp"
-
-using namespace std;
 
 struct data_decompression {
     short*          leaf_index;
@@ -36,21 +33,22 @@ Node* retrieve_tree(int& idx, int& idx2, unsigned char* decomp, int tam, short* 
 	return node;
 }
 
-unsigned char* retrieve_file(Node* tree, unsigned char *bitstring, int tam, int file_len, int idx) {
+unsigned char* retrieve_string(Node* tree, unsigned char *bitstring, int tam, int file_len, int idx) {
     unsigned char* original_file = new unsigned char[file_len];
 
     Node* root = tree;
 
     int index = 0;
 
+    bool border_case = tree->left > 0 ? 0 : 1;
+
     while(idx <= tam) {
         if(root->leaf) {
             original_file[index++] = root->symbol;
             root = tree;
 
-            if(file_len == 1) {
-                break;
-            }
+            if(border_case)
+                idx++;
 
             continue;
         }
@@ -146,15 +144,16 @@ double decompress_file(char* input, char* output) {
 
     Node* tree = retrieve_tree(idx, idx2, data->tree, data->tree_len, data->leaf_index);
 
-    original_file = retrieve_file(tree, data->parsed_bitstring, data->bitstring_len, data->file_len, 0);
+    original_file = retrieve_string(tree, data->parsed_bitstring, data->bitstring_len, data->file_len, 0);
 
     generate_original_file(output, original_file, data->file_len);
 
-    delete[] original_file;
-    delete[] data->parsed_bitstring;
-    delete[] data->tree;
-    delete[] data->leaf_index;
-    delete[] data->bitstring;
+
+	delete[] original_file;
+	delete[] data->parsed_bitstring;
+	delete[] data->tree;
+	delete[] data->leaf_index;
+	delete[] data->bitstring;
 
     fclose(fp);
 
