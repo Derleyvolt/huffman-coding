@@ -150,15 +150,14 @@ double decompress_file(char* input, char* output) {
 
     generate_original_file(output, original_file, data->file_len);
 
+    delete[] original_file;
+    delete[] data->parsed_bitstring;
+    delete[] data->tree;
+    delete[] data->leaf_index;
+    delete[] data->leaf_index;
+    delete[] data->bitstring;
 
-	delete[] original_file;
-	delete[] data->parsed_bitstring;
-	delete[] data->tree;
-	delete[] data->leaf_index;
-	delete[] data->leaf_index;
-	delete[] data->bitstring;
-
-	fclose(fp);
+    fclose(fp);
 
     return Timer();
 }
