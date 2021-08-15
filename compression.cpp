@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string.h>
 #include <chrono>
 
@@ -201,6 +200,10 @@ void generate_compress_form(Node* node, unsigned char compress[257], int len = 0
 		for(int i = 0; i < len; i++) {
 			node->compression[i] = compress[i];
 		}	
+
+		if(len == 0) {
+			node->compression[0] = 0;
+		}
 
 		return;
 	}
