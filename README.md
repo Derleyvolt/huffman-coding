@@ -1,5 +1,5 @@
-## - How to use
+### Compress
+> ./program.exe c input output
 
-#### Compress: ./program.exe c input output
-
-#### Decompress: ./program.exe d input output
+### Decompress
+> ./program.exe d input output
